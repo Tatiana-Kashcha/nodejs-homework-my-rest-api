@@ -25,7 +25,7 @@ router.get("/", async (req, res, next) => {
 router.get("/:contactId", async (req, res, next) => {
   try {
     const { contactId } = req.params;
-    const result = await contacts.getById(contactId);
+    const result = await contacts.getContactById(contactId);
     if (!result) {
       throw HttpError(404, "Not found");
     }
@@ -56,7 +56,7 @@ router.delete("/:contactId", async (req, res, next) => {
       throw HttpError(404, "Not found");
     }
     res.json({
-      message: "Delete success",
+      message: "contact deleted",
     });
   } catch (error) {
     next(error);
