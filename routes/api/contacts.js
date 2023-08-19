@@ -66,6 +66,11 @@ router.delete("/:contactId", async (req, res, next) => {
 router.put("/:contactId", async (req, res, next) => {
   try {
     const { error } = addSchema.validate(req.body);
+
+    // if (!req.body) {
+    //   throw HttpError(400, "missing fields");
+    // }
+
     if (error) {
       throw HttpError(400, error.message);
     }
