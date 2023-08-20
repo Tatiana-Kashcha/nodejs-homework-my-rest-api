@@ -32,10 +32,6 @@ const addNewContact = async (req, res, next) => {
       Object.keys(schemas.addSchema._ids).length !==
       Object.keys(req.body).length;
 
-    console.log(missingField);
-    console.log(Object.keys(schemas.addSchema._ids).length);
-    console.log(Object.keys(req.body).length);
-
     if (emptyBody) {
       throw HttpError(400, "missing fields");
     }
@@ -77,17 +73,25 @@ const editContact = async (req, res, next) => {
   try {
     const { error } = schemas.addSchema.validate(req.body);
     const emptyBody = Object.keys(req.body).length === 0;
+    const missingField =
+      Object.keys(schemas.addSchema._ids).length !==
+      Object.keys(req.body).length;
 
     if (emptyBody) {
       throw HttpError(400, "missing fields");
     }
 
     if (error) {
-      throw HttpError(
-        400,
-        `missing required ${error.details[0].path[0]} field`
-      );
+      if (missingField) {
+        throw HttpError(
+          400,
+          `missing required ${error.details[0].path[0]} field`
+        );
+      } else {
+        throw HttpError(400, error.message);
+      }
     }
+
     const { contactId } = req.params;
     const result = await contacts.updateContact(contactId, req.body);
     if (!result) {
