@@ -31,10 +31,6 @@ const addNewContact = async (req, res, next) => {
     const missingField =
       schemas.addSchema._ids._byKey.size !== Object.keys(req.body).length;
 
-    console.log(missingField);
-    console.log(schemas.addSchema._ids._byKey.size);
-    console.log(Object.keys(req.body).length);
-
     if (emptyBody) {
       throw HttpError(400, "missing fields");
     }
