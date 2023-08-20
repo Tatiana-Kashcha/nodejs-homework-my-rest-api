@@ -38,6 +38,12 @@ router.get("/:contactId", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     const { error } = addSchema.validate(req.body);
+    const emptyBody = Object.keys(req.body).length === 0;
+
+    if (emptyBody) {
+      throw HttpError(400, "missing fields");
+    }
+
     if (error) {
       throw HttpError(400, error.message);
     }
