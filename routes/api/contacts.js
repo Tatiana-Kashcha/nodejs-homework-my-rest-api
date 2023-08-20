@@ -45,7 +45,10 @@ router.post("/", async (req, res, next) => {
     }
 
     if (error) {
-      throw HttpError(400, error.message);
+      throw HttpError(
+        400,
+        `missing required ${error.details[0].path[0]} field`
+      );
     }
     const result = await contacts.addContact(req.body);
     res.status(201).json(result);
@@ -79,7 +82,10 @@ router.put("/:contactId", async (req, res, next) => {
     }
 
     if (error) {
-      throw HttpError(400, error.message);
+      throw HttpError(
+        400,
+        `missing required ${error.details[0].path[0]} field`
+      );
     }
     const { contactId } = req.params;
     const result = await contacts.updateContact(contactId, req.body);
