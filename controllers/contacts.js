@@ -29,8 +29,11 @@ const addNewContact = async (req, res, next) => {
     const { error } = schemas.addSchema.validate(req.body);
     const emptyBody = Object.keys(req.body).length === 0;
     const missingField =
-      Object.keys(schemas.addSchema._ids).length !==
-      Object.keys(req.body).length;
+      schemas.addSchema._ids._byKey.size !== Object.keys(req.body).length;
+
+    console.log(missingField);
+    console.log(schemas.addSchema._ids._byKey.size);
+    console.log(Object.keys(req.body).length);
 
     if (emptyBody) {
       throw HttpError(400, "missing fields");
@@ -74,8 +77,7 @@ const editContact = async (req, res, next) => {
     const { error } = schemas.addSchema.validate(req.body);
     const emptyBody = Object.keys(req.body).length === 0;
     const missingField =
-      Object.keys(schemas.addSchema._ids).length !==
-      Object.keys(req.body).length;
+      schemas.addSchema._ids._byKey.size !== Object.keys(req.body).length;
 
     if (emptyBody) {
       throw HttpError(400, "missing fields");
