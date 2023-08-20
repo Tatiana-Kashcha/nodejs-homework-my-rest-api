@@ -33,12 +33,17 @@ const addNewContact = async (req, res, next) => {
       throw HttpError(400, "missing fields");
     }
 
+    // if (error) {
+    //   throw HttpError(
+    //     400,
+    //     `missing required ${error.details[0].path[0]} field`
+    //   );
+    // }
+
     if (error) {
-      throw HttpError(
-        400,
-        `missing required ${error.details[0].path[0]} field`
-      );
+      throw HttpError(400, error.message);
     }
+
     const result = await contacts.addContact(req.body);
     res.status(201).json(result);
   } catch (error) {
