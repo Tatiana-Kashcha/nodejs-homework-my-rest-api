@@ -1,6 +1,5 @@
 const contacts = require("../models/contacts");
 const { HttpError } = require("../helpers");
-// const schemas = require("../schemas/contacts");
 
 const getAllContacts = async (req, res, next) => {
   try {
