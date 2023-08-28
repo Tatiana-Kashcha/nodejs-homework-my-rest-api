@@ -10,7 +10,7 @@ const getAllContacts = async (req, res, next) => {
   }
 };
 
-const getContact = async (req, res, next) => {
+const getContactById = async (req, res, next) => {
   try {
     const { contactId } = req.params;
     const result = await Contact.findById(contactId);
@@ -23,7 +23,7 @@ const getContact = async (req, res, next) => {
   }
 };
 
-const addNewContact = async (req, res, next) => {
+const addContact = async (req, res, next) => {
   try {
     const result = await Contact.create(req.body);
     res.status(201).json(result);
@@ -47,7 +47,7 @@ const addNewContact = async (req, res, next) => {
 //   }
 // };
 
-const editContact = async (req, res, next) => {
+const updateContactById = async (req, res, next) => {
   try {
     const { contactId } = req.params;
     const result = await Contact.findByIdAndUpdate(contactId, req.body);
@@ -62,8 +62,8 @@ const editContact = async (req, res, next) => {
 
 module.exports = {
   getAllContacts,
-  getContact,
-  addNewContact,
+  getContactById,
+  addContact,
   // delContact,
-  editContact,
+  updateContactById,
 };
