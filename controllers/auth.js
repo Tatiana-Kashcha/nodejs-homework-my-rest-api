@@ -12,7 +12,7 @@ const register = async (req, res, next) => {
     const user = await User.findOne({ email });
 
     if (user) {
-      throw HttpError(409, "Email already in use");
+      throw HttpError(409, "Email in use");
     }
 
     const hashPassword = await bcrypt.hash(password, 10);
@@ -47,6 +47,7 @@ const login = async (req, res, next) => {
 
     res.json({
       token,
+      user: { email: user.email, subscription: user.subscription },
     });
   } catch (error) {
     next(error);
