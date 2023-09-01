@@ -1,6 +1,8 @@
 const { Schema, model } = require("mongoose");
 const { handleMongooseError } = require("../helpers");
 
+const subList = ["starter", "pro", "business"];
+
 const userSchema = new Schema(
   {
     password: {
@@ -14,7 +16,7 @@ const userSchema = new Schema(
     },
     subscription: {
       type: String,
-      enum: ["starter", "pro", "business"],
+      enum: subList,
       default: "starter",
     },
     token: String,
