@@ -5,10 +5,11 @@ const {
   validateData,
   isValidId,
   validateStatus,
+  authenticate,
 } = require("../../middlewares");
 const schemas = require("../../schemas/contacts");
 
-router.get("/", controller.getAllContacts);
+router.get("/", authenticate, controller.getAllContacts);
 
 router.get("/:contactId", isValidId, controller.getContactById);
 
