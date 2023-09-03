@@ -10,7 +10,6 @@ const authSchema = Joi.object({
     "any.required": "missing required email field",
   }),
   subscription: Joi.string().valid(...subList),
-  token: Joi.string(),
 });
 
 module.exports = {
