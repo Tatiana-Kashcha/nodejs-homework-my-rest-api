@@ -26,7 +26,6 @@ const authenticate = async (req, res, next) => {
     // req.user = user;
     next();
   } catch {
-    // console.error();
     next(HttpError(401, "Not authorized"));
   }
 };
