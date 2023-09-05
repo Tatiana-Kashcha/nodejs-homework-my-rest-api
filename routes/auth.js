@@ -12,4 +12,8 @@ router.post("/register", validateData(schemas.authSchema), controller.register);
 
 router.post("/login", validateData(schemas.authSchema), controller.login);
 
+// router.get("/current", authenticate, ctrl.getCurrent);
+
+// router.post("/logout", authenticate, ctrl.logout);
+
 module.exports = router;
