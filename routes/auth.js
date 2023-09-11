@@ -23,4 +23,6 @@ router.patch(
   controller.updateAvatar
 );
 
+router.post("/avatars", upload.single("avatar"), controller.giveStaticImg);
+
 module.exports = router;

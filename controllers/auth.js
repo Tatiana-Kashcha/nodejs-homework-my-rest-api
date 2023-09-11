@@ -113,10 +113,22 @@ const updateAvatar = async (req, res, next) => {
   }
 };
 
+const giveStaticImg = async (req, res) => {
+  const { path: tempUpload, originalname } = req.file;
+  const resultUpload = path.join(avatarDir, originalname);
+
+  await fs.rename(tempUpload, resultUpload);
+  const cover = path.join("public", "avatars", originalname);
+  const coverImg = { cover };
+
+  res.status(201).json(coverImg);
+};
+
 module.exports = {
   register,
   login,
   logout,
   getCurrent,
   updateAvatar,
+  giveStaticImg,
 };
