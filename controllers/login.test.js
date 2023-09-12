@@ -48,6 +48,7 @@ describe("test login function", () => {
 
     expect(statusCode).toBe(201);
     expect(body.user.email).toBe(data.email);
+    expect(body.user.subscription).toBe("starter");
 
     const user = await User.findOne({ email: data.email });
     expect(user.email).toBe(data.email);
