@@ -1,9 +1,9 @@
 const nodemailer = require("nodemailer");
 
-const { MAILTRAP_USER, MAILTRAP_PASS } = process.env;
+const { MAILTRAP_HOST, MAILTRAP_USER, MAILTRAP_PASS } = process.env;
 
 const transport = nodemailer.createTransport({
-  host: "sandbox.smtp.mailtrap.io",
+  host: MAILTRAP_HOST,
   port: 2525,
   auth: {
     user: MAILTRAP_USER,

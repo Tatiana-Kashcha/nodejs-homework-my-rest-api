@@ -6,7 +6,7 @@ const authSchema = Joi.object({
   password: Joi.string().required().messages({
     "any.required": "missing required password field",
   }),
-  email: Joi.string().required().messages({
+  email: Joi.string().required().email().messages({
     "any.required": "missing required email field",
   }),
   subscription: Joi.string().valid(...subList),

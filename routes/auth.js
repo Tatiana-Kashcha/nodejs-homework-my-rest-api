@@ -27,4 +27,6 @@ router.post("/avatars", upload.single("avatar"), controller.giveStaticImg);
 
 router.get("/verify/:verificationToken", controller.verify);
 
+router.post("/verify");
+
 module.exports = router;
