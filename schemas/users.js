@@ -12,6 +12,13 @@ const authSchema = Joi.object({
   subscription: Joi.string().valid(...subList),
 });
 
+const emailSchema = Joi.object({
+  email: Joi.string().required().email().messages({
+    "any.required": "missing required field email",
+  }),
+});
+
 module.exports = {
   authSchema,
+  emailSchema,
 };
