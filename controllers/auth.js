@@ -39,7 +39,7 @@ const register = async (req, res, next) => {
       html: `
       <p>To confirm your registration, please click on link below</p>
       <p>
-        <a href="http://localhost:${PORT}/users/verify/${verificationToken}">Click me</a>
+        <a target="_blank" href="http://localhost:${PORT}/users/verify/${verificationToken}">Click verify email</a>
       </p>
       `,
       text: `
@@ -99,7 +99,7 @@ const logout = async (req, res, next) => {
   }
 };
 
-const getCurrent = async (req, res, next) => {
+const getCurrent = (req, res, next) => {
   try {
     const { email, subscription } = req.user;
 
@@ -167,6 +167,40 @@ const verify = async (req, res, next) => {
   }
 };
 
+const resendVerifyEmail = async (req, res, next) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      throw HttpError(404, "User not found");
+    }
+
+    if (user.verify) {
+      throw HttpError(400, "Verification has already been passed");
+    }
+
+    await sendEmail({
+      to: user.email,
+      subject: "To verify your email",
+      html: `
+      <p>To confirm your registration, please click on link below</p>
+      <p>
+        <a target="_blank" href="http://localhost:${PORT}/users/verify/${user.verificationToken}">Click verify email</a>
+      </p>
+      `,
+      text: `
+        To confirm your registration, please click on link below\n
+        http://localhost:${PORT}/users/verify/${user.verificationToken}
+      `,
+    });
+
+    res.json({ message: "Verification email sent" });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   register,
   login,
@@ -175,4 +209,5 @@ module.exports = {
   updateAvatar,
   giveStaticImg,
   verify,
+  resendVerifyEmail,
 };
