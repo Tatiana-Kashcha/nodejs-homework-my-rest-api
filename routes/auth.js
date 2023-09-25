@@ -8,6 +8,12 @@ const { validateData, authenticate, upload } = require("../middlewares");
 
 const schemas = require("../schemas/users");
 
+// const swaggerUi = require("swagger-ui-express");
+// const swaggerDocument = require("../swagger.json");
+
+// router.use("/api-docs", swaggerUi.serve);
+// router.get("/api-docs", swaggerUi.setup(swaggerDocument));
+
 router.post("/register", validateData(schemas.authSchema), controller.register);
 
 router.post("/login", validateData(schemas.authSchema), controller.login);

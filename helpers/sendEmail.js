@@ -12,7 +12,8 @@ const transport = nodemailer.createTransport({
 });
 
 const sendEmail = (message) => {
-  message["from"] = "tkashcha@gmail.com";
+  // message["from"] = "tkashcha@gmail.com";  //на таку запис ESLint свариться!!
+  message.from = "tkashcha@gmail.com";
 
   return transport.sendMail(message);
 };

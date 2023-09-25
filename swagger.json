@@ -1,0 +1,23 @@
+{"openapi": "3.0.1",
+"info": {
+  "version": "1.0.0",
+  "title": "Swagger for my REST API",
+  "description": "Showing off swagger-ui-express",
+  "license": {
+    "name": "MIT",
+    "url": "https://opensource.org/licenses/MIT"
+  }
+},
+"consumes": ["application/json"],
+"produces": ["application/json"],
+"servers": [{ "url": "http://localhost:3000" }],
+"tags": [
+  {
+    "name": "Auth",
+    "description": "Authorization endpoints"
+  },
+  {
+    "name": "Project",
+    "description": "Project endpoints"
+  }
+]}
