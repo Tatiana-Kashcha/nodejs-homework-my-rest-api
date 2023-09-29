@@ -7,8 +7,12 @@ const contactsRouter = require("./routes/api/contacts");
 const authRouter = require("./routes/auth");
 
 const app = express();
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger.json");
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(logger(formatsLogger));
 app.use(cors());
