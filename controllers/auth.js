@@ -81,7 +81,11 @@ const login = async (req, res, next) => {
 
     res.json({
       token,
-      user: { email: user.email, subscription: user.subscription },
+      user: {
+        email: user.email,
+        subscription: user.subscription,
+        token: user.token,
+      },
     });
   } catch (error) {
     next(error);
