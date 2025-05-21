@@ -33,6 +33,8 @@ const register = async (req, res, next) => {
       verificationToken,
     });
 
+    console.log(newUser);
+
     await sendEmail({
       to: newUser.email,
       subject: "To verify your email",
@@ -105,11 +107,12 @@ const logout = async (req, res, next) => {
 
 const getCurrent = (req, res, next) => {
   try {
-    const { email, subscription } = req.user;
+    const { email, subscription, avatarURL } = req.user;
 
     res.json({
       email,
       subscription,
+      avatarURL,
     });
   } catch (error) {
     next(error);
